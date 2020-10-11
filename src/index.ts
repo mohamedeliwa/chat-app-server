@@ -1,13 +1,7 @@
-import express, { Request, Response } from "express";
-// import cors from "cors";
-const app = express();
+import app from "./app";
 
-// app.use(cors());
+const port: number = 3000;
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).send("Hello World!");
-});
-
-app.listen(8000, () => {
-  console.log("Server Started at Port, 8000");
+app.listen(port, () => {
+  console.log("Server Started at Port, 3000");
 });
