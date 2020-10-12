@@ -9,7 +9,8 @@ const app = express();
 
 
 app.get("/", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+  res.send("Hello World");
+  // res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 export default app;

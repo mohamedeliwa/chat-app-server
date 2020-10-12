@@ -1,7 +1,7 @@
 import socketIO from "socket.io";
 
 const io = socketIO({
-    // serveClient: false
+    serveClient: false
 });
 
 io.on("connection", (socket: any) => {
