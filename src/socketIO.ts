@@ -4,9 +4,9 @@ const io = socketIO({
     serveClient: false
 });
 
-io.on("connection", (socket: any) => {
+io.on("connection", (socket) => {
   console.log("a user connected");
-  socket.on("chat message", (msg: any) => {
+  socket.on("chat message", (msg) => {
     console.log("message: " + msg);
     io.emit("chat message", msg);
   });
