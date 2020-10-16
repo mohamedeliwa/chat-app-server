@@ -27,14 +27,12 @@ io.on("connection", (socket) => {
   console.log("a user connected");
 
   socket.on("chat join", (name) => {
-    console.log(name);
-    console.log(socket.id);
     users.push({
       id: socket.id,
       name,
     });
     socket.emit("success", "successfully joined chatroom!");
-    socket.emit("update users", users);
+    io.emit("update users", users);
   });
 
   socket.on("chat message", (msg) => {
