@@ -16,6 +16,7 @@ let users: User[] = [];
  * Events:
  * "connection"
  * "chat join"
+ * "private room create"
  * "chat message"
  * "disconnect"
  * "success"
@@ -33,6 +34,13 @@ io.on("connection", (socket) => {
     });
     socket.emit("success", "successfully joined chatroom!");
     io.emit("update users", users);
+  });
+
+  socket.on("private room create", (name) => {
+    socket.join(socket.id);
+    socket.emit("success", "successfully joined chatroom!");
+    // io.emit("update users", users);
+    io.to(socket.id).emit(`${name} joined the room!`);
   });
 
   socket.on("chat message", (msg) => {
