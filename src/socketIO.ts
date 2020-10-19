@@ -10,11 +10,11 @@ const io = socketIO({
   serveClient: false,
 });
 
-const users: User[] = [];
+let users: User[] = [];
 
 /**
  * Events:
- * "connect"
+ * "connection"
  * "chat join"
  * "chat message"
  * "disconnect"
@@ -37,10 +37,17 @@ io.on("connection", (socket) => {
 
   socket.on("chat message", (msg) => {
     console.log("message: " + msg);
-    io.emit("chat message", msg);
+    const sender = users.find(user => user.id === socket.id);
+    if(sender){
+      io.emit("chat message", msg, sender.name);
+    }else{
+      io.emit("chat message", msg, "anonymous");
+    }
   });
 
   socket.on("disconnect", () => {
+    users = users.filter(user => user.id !== socket.id);
+    io.emit("update users", users);
     console.log("user disconnected");
   });
 });
