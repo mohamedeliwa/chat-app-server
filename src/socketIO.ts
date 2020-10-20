@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("chat message", (msg: string, username?: string) => {
-    console.log("message: " + msg);
+    // console.log("message: " + msg);
     const sender = users.find((user) => user.id === socket.id);
     if (sender) {
       io.emit("chat message", msg, sender.name);
@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnecting", () => {
-    console.log(socket);
+    // console.log(socket);
     const rooms = Object.keys(socket.rooms);
     rooms.forEach(room => {
       io.to(room).emit("chat message", 'a user left the chat' ,"server")
