@@ -63,6 +63,15 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("disconnecting", () => {
+    console.log(socket);
+    const rooms = Object.keys(socket.rooms);
+    rooms.forEach(room => {
+      io.to(room).emit("chat message", 'a user left the chat' ,"server")
+    })
+    
+  })
+
   socket.on("disconnect", () => {
     users = users.filter((user) => user.id !== socket.id);
     io.emit("update users", users);
