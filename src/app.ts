@@ -6,8 +6,6 @@ const app = express();
 
 // app.use(cors());
 
-
-
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World");
   // res.sendFile(path.join(__dirname, "../public/index.html"));
